@@ -6,7 +6,7 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 12:27:24 by jbouyer           #+#    #+#             */
-/*   Updated: 2021/12/20 17:07:06 by jbouyer          ###   ########.fr       */
+/*   Updated: 2021/12/20 17:10:08 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <unistd.h>
@@ -123,3 +123,7 @@ int main ()
 	printf("%%");
 	ft_printf("%%");
 }
+
+
+to do ; 
+a faire : il faut remettre dans la artie printf less histoires de args avec la definition et tout et ensuite envoyer a printarg, sinon ca le prend pas forcementt en compte> noter que i et d sont les memes, et les seules subtilites sont en terme de type majoritairement. et c'est ce a quoi il faut faire attention.
