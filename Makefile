@@ -6,7 +6,7 @@
 #    By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/20 11:04:03 by jbouyer           #+#    #+#              #
-#    Updated: 2021/12/21 08:04:11 by jbouyer          ###   ########.fr        #
+#    Updated: 2022/01/03 13:04:36 by jbouyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ OBJS = ${SRCS:.c=.o}
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	ar rc $(NAME) $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 
-%.o : %.c printf.h
+%.o : %.c
 	 gcc $(FLAGS) -c $< -o $@
 
 clean :
