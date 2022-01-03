@@ -6,7 +6,7 @@
 #    By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/20 11:04:03 by jbouyer           #+#    #+#              #
-#    Updated: 2022/01/03 13:04:36 by jbouyer          ###   ########.fr        #
+#    Updated: 2022/01/03 13:06:49 by jbouyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,13 @@ FLAGS = -Wall -Wextra -Werror
 SRCS = ft_printf_utils.c ft_printf.c
 OBJS = ${SRCS:.c=.o}
 
+HEADER = printf.h
 all : $(NAME)
 
 $(NAME) : $(OBJS)
 	ar rcs $(NAME) $(OBJS)
 
-%.o : %.c
+%.o : %.c $(HEADER)
 	 gcc $(FLAGS) -c $< -o $@
 
 clean :

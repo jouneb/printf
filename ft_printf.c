@@ -6,21 +6,20 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 08:03:05 by jbouyer           #+#    #+#             */
-/*   Updated: 2022/01/03 13:03:07 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/03 15:27:19 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdarg.h>
-#include "printf.h"
+#include "ft_printf.h"
 
-size_t	ft_putchar(char c)
+size_t	ft_putchar(int c)
 {
 	size_t	t;
 
 	t = 0;
-	write (1, &c, 1);
-	t++;
+	t = write (1, &c, 1);
 	return (t);
 }
 
@@ -89,22 +88,22 @@ size_t ft_printarg(char c, va_list args)
 	t = 0;
 	if( c == 'c')
 		t = ft_putchar(va_arg(args, int));
-	if(c == 's')
+	else if(c == 's')
 		t = ft_putstr(va_arg(args, char *));
-	if(c == 'p')
+	else if(c == 'p')
 		t = ft_puthexap(va_arg(args, unsigned long int));
-	if(c == 'd')
+	else if(c == 'd')
 		t = ft_putnbr(va_arg(args, long int));
-	if(c == 'i')
+	else if(c == 'i')
 		t = ft_putnbr(va_arg(args, long int));
-	if(c == 'u')
+	else if(c == 'u')
 		ft_putunsignednbr(va_arg(args, unsigned int));
-	if(c == 'x')
+	else if(c == 'x')
 		t = ft_putnbrhexa(va_arg(args, unsigned int));
-	if(c == 'X')
+	else if(c == 'X')
 		t = ft_puthexamaj(va_arg(args, unsigned int));
-	if (c == '%')
-		t = write (1, "%", 1);
+	//if (c == '%')
+	//	t = write (1, "%", 1);
 	return(t);
 }
 
@@ -145,19 +144,25 @@ int ft_printf(const char *str, ...)
 	return (t);
 }
 
-int main ()
+/*int main ()
 {
 	int p[] = {1232};
-	printf(" %s\n", "jesuiscorrect");
-	ft_printf(" %s\n", "jesuiscorrect");
-	printf("%p\n", p);
-	ft_printf("%p\n", p);
-	ft_printf("c = %c\n",'a');
-	printf("c = %c\n",'a');
-	ft_printf(" %d\n", 1789);
-	printf(" %d", 1789);
-	ft_printf(" %i\n", 1984);
-	printf(" %i\n", 1984);
-	ft_printf("%%\n");
-	printf("%%\n");
-}
+	//printf("%d\n",printf("%s\n", "jesuiscorrect"));
+//	printf("%d\n",ft_printf("%s\n", "jesuiscorrect"));
+  // printf("%c\n", '0');
+   printf("%d\n",printf("%c", '-256'));
+   printf("%c", '-256');
+//   ft_printf("%c\n", '0');
+   printf("%d\n",ft_printf("%c", '-256'));
+  ft_printf("%c", '-256');
+//	printf("%p\n", p);
+//	ft_printf("%p\n", p);
+//	ft_printf("c = %c\n",'a');
+//	printf("c = %c\n",'a');
+//	ft_printf(" %d\n", 1789);
+//	printf(" %d", 1789);
+//	ft_printf(" %i\n", 1984);
+//	printf(" %i\n", 1984);
+//	ft_printf("%%\n");
+//	printf("%%\n");
+}*/
