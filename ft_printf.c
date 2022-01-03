@@ -6,7 +6,7 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 08:03:05 by jbouyer           #+#    #+#             */
-/*   Updated: 2021/12/21 08:03:28 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/03 12:39:52 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ size_t ft_printarg(char c, va_list args)
 		t = ft_putnbrhexa(va_arg(args, unsigned int));
 	if(c == 'X')
 		t = ft_puthexamaj(va_arg(args, unsigned int));
-        if (str[i] == '%' && flag == 0)
 	if (c == '%')
 		t = write (1, "%", 1);
 	return(t);
