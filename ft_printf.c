@@ -6,7 +6,7 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 08:03:05 by jbouyer           #+#    #+#             */
-/*   Updated: 2022/01/04 11:05:18 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/04 16:41:32 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,23 @@ size_t ft_putstr(char *str)
 	}
 	return(i);
 }
-size_t	ft_putnbrhexa(unsigned long int nb)
+size_t	ft_putnbrhexa(unsigned int nb)
 {
-	unsigned int nbr;
+	long int nbr;
 	char	*base;
-	size_t	t;
+	static size_t	t;
 
 	t = 0;
 	base = "0123456789abcdef";
 	nbr = nb;
 	if (nb <= 15)
-		t = t + ft_putchar(base[nb]);
+		 ft_putchar(base[nb]);
+	t++;
 	if(nb > 15)
 	{
 		ft_putnbrhexa(nb / 16);
-		t = t + ft_putchar(base[nb % 16]);
+		ft_putchar(base[nb % 16]);
+		t++;
 	}
 	return (t);
 }
@@ -62,25 +64,23 @@ size_t	ft_putnbrhexa(unsigned long int nb)
 size_t	ft_putnbr(int nb)
 {
 	size_t		i;
-	size_t		t;
 	long int	nbr;
 
 	i = 0;
-	t = 0;
 	nbr = nb;
 	if (nbr < 0)
 	{
-		t = t + ft_putchar('-');
-		nb = nb * -1;
+		ft_putchar('-');
+		nbr = nbr * -1;
 	}
-	if (nbr > 0 && nbr <= 9)
-		t = t + ft_putchar(nb + '0');
-	if (nb > 9)
+	if (nbr >= 0 && nbr <= 9)
+		ft_putchar(nbr + '0');
+	if (nbr > 9)
 	{
-		ft_putnbr(nb / 10);
-		t = t + ft_putchar(nb % 10 + '0');
+		ft_putnbr(nbr / 10);
+		ft_putchar(nbr % 10 + '0');
 	}
-	return (t);
+	return (ft_count(nb));
 }
 
 size_t ft_printarg(char c, va_list args)
@@ -99,7 +99,7 @@ size_t ft_printarg(char c, va_list args)
 	else if(c == 'i')
 		t = ft_putnbr(va_arg(args, long int));
 	else if(c == 'u')
-		ft_putunsignednbr(va_arg(args, unsigned int));
+		t = ft_putunsignednbr(va_arg(args, unsigned int));
 	else if(c == 'x')
 		t = ft_putnbrhexa(va_arg(args, unsigned int));
 	else if(c == 'X')
@@ -151,19 +151,20 @@ int ft_printf(const char *str, ...)
 //   ft_printf("%c\n", '0');
    //printf("%d\n",ft_printf("%c", '-256'));
   //ft_printf("%c", '-256');
-//	printf("%p\n", p);
-//	printf("%s\n",printf("%p\n", p));
-//	ft_printf("%p\n", p);
 //	ft_printf("c = %c\n",'a');
 //	printf("c = %c\n",'a');
 //	ft_printf(" %d\n", 1789);
-//	printf(" %d", 1789);
-//	ft_printf(" %i\n", 1984);
+	printf(" %x\n", -2);
+	printf("%d\n",printf(" %x\n", -2));
+	ft_printf(" %x\n ", -2);
+	printf("%d\n",ft_printf(" %x ", -2));
+//	printf(" %d\n", -14);
+//	printf("%d\n",printf(" %d\n", -14));
+//	ft_printf(" %d\n ", -14);
+//	printf("%d\n",ft_printf(" %d ", -14));
+//	ft_printf(" %i\n", );
+//	ft_printf(" %i\n", );
 //	printf(" %i\n", 1984);
 //	ft_printf("%%\n");
 //	printf("%%\n");
-	printf(" NULL %s NULL \n", NULL);
-	printf("%d\n",printf(" NULL %s NULL \n", NULL));
-	ft_printf(" NULL %s NULL ", NULL);
-	printf("%d",ft_printf(" NULL %s NULL ", NULL));
 }*/
