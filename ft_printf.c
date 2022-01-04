@@ -6,7 +6,7 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 08:03:05 by jbouyer           #+#    #+#             */
-/*   Updated: 2022/01/03 15:27:19 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/04 11:05:18 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,19 @@ size_t	ft_putchar(int c)
 size_t ft_putstr(char *str)
 {
 	size_t	i;
-	size_t	t;
 
 	i = 0;
-	t = 0;
+	if (str == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	while(str[i])
 	{
 		write(1, &str[i], 1);
-		t++;
 		i++;
 	}
-	return(t);
+	return(i);
 }
 size_t	ft_putnbrhexa(unsigned long int nb)
 {
@@ -121,24 +123,18 @@ int ft_printf(const char *str, ...)
 	while (str[i])
 	{
 
-		if (str[i] == '%' && flag == 0)
+		if (str[i] == '%')
 		{
-			flag = 1;
 			i++;
-		}
-		if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' || str[i] == 'd'
-			|| str[i] == 'u' || str[i] == 'i' || str[i] == 'x' || str[i] == 'X'
-			)
-		{
-			if (flag == 1)
-			{
+			if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' || str[i] == 'd'
+			|| str[i] == 'u' || str[i] == 'i' || str[i] == 'x' || str[i] == 'X')
 				t = t + ft_printarg(str[i], args);
-				i++;
-			}
-			flag = 0;
+			else 
+				t = t + write (1, &str[i], 1);
 		}
-		t = t + write (1, &str[i], 1);
-		i++;
+			else
+				t = t + write (1, &str[i], 1);
+			i++;
 	}
 	va_end (args);
 	return (t);
@@ -150,12 +146,13 @@ int ft_printf(const char *str, ...)
 	//printf("%d\n",printf("%s\n", "jesuiscorrect"));
 //	printf("%d\n",ft_printf("%s\n", "jesuiscorrect"));
   // printf("%c\n", '0');
-   printf("%d\n",printf("%c", '-256'));
-   printf("%c", '-256');
+   //printf("%d\n",printf("%c", '-256'));
+  // printf("%c", '-256');
 //   ft_printf("%c\n", '0');
-   printf("%d\n",ft_printf("%c", '-256'));
-  ft_printf("%c", '-256');
+   //printf("%d\n",ft_printf("%c", '-256'));
+  //ft_printf("%c", '-256');
 //	printf("%p\n", p);
+//	printf("%s\n",printf("%p\n", p));
 //	ft_printf("%p\n", p);
 //	ft_printf("c = %c\n",'a');
 //	printf("c = %c\n",'a');
@@ -165,4 +162,8 @@ int ft_printf(const char *str, ...)
 //	printf(" %i\n", 1984);
 //	ft_printf("%%\n");
 //	printf("%%\n");
+	printf(" NULL %s NULL \n", NULL);
+	printf("%d\n",printf(" NULL %s NULL \n", NULL));
+	ft_printf(" NULL %s NULL ", NULL);
+	printf("%d",ft_printf(" NULL %s NULL ", NULL));
 }*/
