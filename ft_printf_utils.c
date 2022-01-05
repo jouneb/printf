@@ -6,15 +6,15 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/03 11:26:35 by jbouyer           #+#    #+#             */
-/*   Updated: 2022/01/04 16:28:04 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/05 11:57:25 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "ft_printf.h"
 
 size_t	ft_puthexap(unsigned long int nb)
 {
-	unsigned int nbr;
-	char	*base;
+	unsigned int	nbr;
+	char			*base;
 	static size_t	t;
 
 	t = 0;
@@ -35,19 +35,20 @@ size_t	ft_puthexap(unsigned long int nb)
 	}
 	return (t);
 }
+
 size_t	ft_puthexamaj(unsigned int nb)
 {
-	long int nbr;
-	char	*base;
+	long int		nbr;
+	char			*base;
 	static size_t	t;
 
 	t = 0;
 	base = "0123456789ABCDEF";
 	nbr = nb;
 	if (nb <= 15)
-		 ft_putchar(base[nb]);
+		ft_putchar(base[nb]);
 	t++;
-	if(nb > 15)
+	if (nb > 15)
 	{
 		ft_puthexamaj(nb / 16);
 		ft_putchar(base[nb % 16]);
@@ -63,7 +64,7 @@ size_t	ft_putunsignednbr(unsigned int nb)
 
 	i = 0;
 	nbr = nb;
-	if ( nbr <= 9)
+	if (nbr <= 9)
 		ft_putchar(nb + '0');
 	if (nb > 9)
 	{
@@ -75,8 +76,8 @@ size_t	ft_putunsignednbr(unsigned int nb)
 
 int	ft_count(int nb)
 {
-	int	i;
-	long int nbr;
+	int			i;
+	long int	nbr;
 
 	i = 0;
 	nbr = nb;
@@ -85,11 +86,10 @@ int	ft_count(int nb)
 		i++;
 		nbr = nbr * -1;
 	}
-	while( nbr > 9)
+	while (nbr > 9)
 	{
 		nbr = nbr / 10;
 		i++;
-	
 	}
 	i++;
 	return (i);
@@ -97,15 +97,15 @@ int	ft_count(int nb)
 
 int	ft_ucount(unsigned int nb)
 {
-	unsigned long int nbr;
-	int	i;
+	unsigned long int	nbr;
+	int					i;
 
 	i = 0;
 	nbr = nb;
-	while( nbr > 9)
+	while (nbr > 9)
 	{
 		nbr = nbr / 10;
-		i++;	
+		i++;
 	}
 	i++;
 	return (i);

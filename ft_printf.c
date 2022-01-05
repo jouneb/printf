@@ -6,7 +6,7 @@
 /*   By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 08:03:05 by jbouyer           #+#    #+#             */
-/*   Updated: 2022/01/04 16:41:32 by jbouyer          ###   ########.fr       */
+/*   Updated: 2022/01/05 11:50:06 by jbouyer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,7 @@
 #include <stdarg.h>
 #include "ft_printf.h"
 
-size_t	ft_putchar(int c)
-{
-	size_t	t;
-
-	t = 0;
-	t = write (1, &c, 1);
-	return (t);
-}
-
-size_t ft_putstr(char *str)
+size_t	ft_putstr(char *str)
 {
 	size_t	i;
 
@@ -33,26 +24,27 @@ size_t ft_putstr(char *str)
 		write(1, "(null)", 6);
 		return (6);
 	}
-	while(str[i])
+	while (str[i])
 	{
 		write(1, &str[i], 1);
 		i++;
 	}
-	return(i);
+	return (i);
 }
+
 size_t	ft_putnbrhexa(unsigned int nb)
 {
-	long int nbr;
-	char	*base;
-	static size_t	t;
+	long int			nbr;
+	char				*base;
+	static size_t		t;
 
 	t = 0;
 	base = "0123456789abcdef";
 	nbr = nb;
 	if (nb <= 15)
-		 ft_putchar(base[nb]);
+		ft_putchar(base[nb]);
 	t++;
-	if(nb > 15)
+	if (nb > 15)
 	{
 		ft_putnbrhexa(nb / 16);
 		ft_putchar(base[nb % 16]);
@@ -83,58 +75,54 @@ size_t	ft_putnbr(int nb)
 	return (ft_count(nb));
 }
 
-size_t ft_printarg(char c, va_list args)
+size_t	ft_printarg(char c, va_list args)
 {
 	size_t	t;
 
 	t = 0;
-	if( c == 'c')
+	if (c == 'c')
 		t = ft_putchar(va_arg(args, int));
-	else if(c == 's')
+	else if (c == 's')
 		t = ft_putstr(va_arg(args, char *));
-	else if(c == 'p')
+	else if (c == 'p')
 		t = ft_puthexap(va_arg(args, unsigned long int));
-	else if(c == 'd')
+	else if (c == 'd')
 		t = ft_putnbr(va_arg(args, long int));
-	else if(c == 'i')
+	else if (c == 'i')
 		t = ft_putnbr(va_arg(args, long int));
-	else if(c == 'u')
+	else if (c == 'u')
 		t = ft_putunsignednbr(va_arg(args, unsigned int));
-	else if(c == 'x')
+	else if (c == 'x')
 		t = ft_putnbrhexa(va_arg(args, unsigned int));
-	else if(c == 'X')
+	else if (c == 'X')
 		t = ft_puthexamaj(va_arg(args, unsigned int));
-	//if (c == '%')
-	//	t = write (1, "%", 1);
-	return(t);
+	return (t);
 }
 
-int ft_printf(const char *str, ...)
+int	ft_printf(const char *str, ...)
 {
-	int	i;
-	int flag;
-	va_list args;
-	size_t t;
+	int		i;
+	va_list	args;
+	size_t	t;
 
 	va_start(args, str);
 	i = 0;
-	flag = 0;
 	t = 0;
 	while (str[i])
 	{
-
 		if (str[i] == '%')
 		{
 			i++;
 			if (str[i] == 'c' || str[i] == 's' || str[i] == 'p' || str[i] == 'd'
-			|| str[i] == 'u' || str[i] == 'i' || str[i] == 'x' || str[i] == 'X')
+				|| str[i] == 'u' || str[i] == 'i' || str[i] == 'x'
+				|| str[i] == 'X')
 				t = t + ft_printarg(str[i], args);
-			else 
-				t = t + write (1, &str[i], 1);
-		}
 			else
-				t = t + write (1, &str[i], 1);
-			i++;
+				t = t + write(1, &str[i], 1);
+		}
+		else
+			t = t + write (1, &str[i], 1);
+		i++;
 	}
 	va_end (args);
 	return (t);

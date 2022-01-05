@@ -6,13 +6,13 @@
 #    By: jbouyer <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/20 11:04:03 by jbouyer           #+#    #+#              #
-#    Updated: 2022/01/03 13:06:49 by jbouyer          ###   ########.fr        #
+#    Updated: 2022/01/05 11:58:22 by jbouyer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 FLAGS = -Wall -Wextra -Werror
-SRCS = ft_printf_utils.c ft_printf.c
+SRCS = ft_printf_utils.c ft_printf.c ft_putchar.c
 OBJS = ${SRCS:.c=.o}
 
 HEADER = printf.h
